@@ -1,5 +1,5 @@
-var SimpleSwipe = SimpleSwipe || {};
-(function (SimpleSwipe, $) {
+var SimpleTouch = SimpleTouch || {};
+(function (SimpleTouch, $) {
     'use strict';
     var touch = {}, touchTimeout, longTapDelay = 750, longTapTimeout, swipeTimeout, self = this;
 
@@ -30,6 +30,7 @@ var SimpleSwipe = SimpleSwipe || {};
         var now, touchDiff;
 
         $(document).on('touchstart', function(e) {
+            var eventTarget = SimpleTouch.utils.getTarget(e);
             now = Date.now();
             touchDiff = now - (touch.last || now);
 
@@ -41,25 +42,26 @@ var SimpleSwipe = SimpleSwipe || {};
                 touch.isDoubleTap = true;
             }
 
-            touch.el = $(e.originalEvent.touches[0].target);
-            touch.x1 = e.originalEvent.touches[0].pageX;
-            touch.y1 = e.originalEvent.touches[0].pageY;
+            touch.el = $(eventTarget.target);
+            touch.x1 = eventTarget.pageX;
+            touch.y1 = eventTarget.pageY;
 
             touch.last = now;
 
             longTapTimeout = setTimeout(longTap, longTapDelay);
 
         }).on('touchmove', function (e) {
+            var eventTarget = SimpleTouch.utils.getTarget(e);
             cancelLongTap();
-            touch.x2 = e.originalEvent.touches[0].pageX;
-            touch.y2 = e.originalEvent.touches[0].pageY;
+            touch.x2 = eventTarget.pageX;
+            touch.y2 = eventTarget.pageY;
         }).on('touchend', function (e) {
             cancelLongTap();
 
-            if (SimpleSwipe.utils.isSwipe(touch.x1, touch.x2, touch.y1, touch.y2)) {
+            if (SimpleTouch.utils.isSwipe(touch.x1, touch.x2, touch.y1, touch.y2)) {
                 swipeTimeout = setTimeout(function() {
                     touch.el.trigger('swipe');
-                    touch.el.trigger('swipe' + (SimpleSwipe.utils.swipeDirection(touch.x1, touch.x2, touch.y1, touch.y2)));
+                    touch.el.trigger('swipe' + (SimpleTouch.utils.swipeDirection(touch.x1, touch.x2, touch.y1, touch.y2)));
                     touch = {};
                 }, 0);
             } else if('last' in touch) {
@@ -90,4 +92,4 @@ var SimpleSwipe = SimpleSwipe || {};
             return this.on(event, callback);
         };
     });
-}(SimpleSwipe, $));
+}(SimpleTouch, $));

@@ -153,30 +153,30 @@ describe('swipe events', function () {
         it('should return true for the right x and ys', function () {
             var x1 = 0, x2 = 40, y1 = 0, y2 = 40;
 
-            expect(SimpleSwipe.utils.isSwipe(x1, x2, y1, y2)).toBeTruthy();
+            expect(SimpleTouch.utils.isSwipe(x1, x2, y1, y2)).toBeTruthy();
         });
         it('should handle a swipe left event', function () {
             var x1 = 0, x2 = 40, y1 = 0, y2 = 0;
 
-            expect(SimpleSwipe.utils.swipeDirection(x1, x2, y1, y2)).toBe('Right');
+            expect(SimpleTouch.utils.swipeDirection(x1, x2, y1, y2)).toBe('Right');
         });
 
         it('should handle a swipe right event', function () {
             var x1 = 0, x2 = -40, y1 = 0, y2 = 0;
 
-            expect(SimpleSwipe.utils.swipeDirection(x1, x2, y1, y2)).toBe('Left');
+            expect(SimpleTouch.utils.swipeDirection(x1, x2, y1, y2)).toBe('Left');
         });
 
         it('should handle a swipe up event', function () {
             var x1 = 0, x2 = 0, y1 = 0, y2 = -40;
 
-            expect(SimpleSwipe.utils.swipeDirection(x1, x2, y1, y2)).toBe('Up');
+            expect(SimpleTouch.utils.swipeDirection(x1, x2, y1, y2)).toBe('Up');
         });
 
         it('should handle a swipe down event', function () {
             var x1 = 0, x2 = 0, y1 = 0, y2 = 40;
 
-            expect(SimpleSwipe.utils.swipeDirection(x1, x2, y1, y2)).toBe('Down');
+            expect(SimpleTouch.utils.swipeDirection(x1, x2, y1, y2)).toBe('Down');
         });
     });
 

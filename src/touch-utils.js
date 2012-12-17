@@ -1,5 +1,5 @@
-var SimpleSwipe = SimpleSwipe || {};
-SimpleSwipe.utils =  {};
+var SimpleTouch = SimpleTouch || {};
+SimpleTouch.utils =  {};
 
 (function () {
     'use strict';
@@ -14,4 +14,11 @@ SimpleSwipe.utils =  {};
         return xDelta >= yDelta ? (x1 - x2 > 0 ? 'Left' : 'Right') : (y1 - y2 > 0 ? 'Up' : 'Down');
     };
 
-}).apply(SimpleSwipe.utils);
+    self.getTarget = function (e) {
+        if (e.originalEvent) {
+            return e.originalEvent.touches[0];
+        }
+        return e;
+    };
+
+}).apply(SimpleTouch.utils);
