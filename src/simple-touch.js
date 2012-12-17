@@ -84,7 +84,9 @@ var SimpleTouch = SimpleTouch || {};
                     }, 250);
                 }
             }
-        });
+        }).bind('touchcancel', cancelAll);
+
+        $(window).bind('scroll', cancelAll);
     });
 
     ['tap', 'singleTap', 'doubleTap', 'longTap', 'swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown'].forEach(function (event) {
