@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     lint: {
-      all: ['grunt.js', '../../src/js/Knob.js']
+      all: ['grunt.js', '../../src/simple-touch.js', '../../src/touch-utils.js']
     },
     jshint: {
       options: {
@@ -15,8 +15,8 @@ module.exports = function(grunt) {
     },
     min: {
       dist: {
-        src: '../../src/js/Knob.js',
-        dest: '../../dist/knob.min.js'
+        src: ['../../src/simple-touch.js', '../../src/touch-utils.js'],
+        dest: '../../dist/simple-touch.min.js'
       }
     },
     uglify: {}

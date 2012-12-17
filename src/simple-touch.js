@@ -4,7 +4,7 @@ var SimpleSwipe = SimpleSwipe || {};
     var touch = {}, touchTimeout, longTapDelay = 750, longTapTimeout, swipeTimeout, self = this;
 
     function longTap() {
-        longTapTimeout = null
+        longTapTimeout = null;
         if (touch.last) {
             touch.el.trigger('longTap');
             touch = {};
@@ -14,7 +14,7 @@ var SimpleSwipe = SimpleSwipe || {};
     function cancelLongTap() {
         if (longTapTimeout) {
             clearTimeout(longTapTimeout);
-        };
+        }
         longTapTimeout = null;
     }
 
@@ -32,7 +32,10 @@ var SimpleSwipe = SimpleSwipe || {};
         $(document).on('touchstart', function(e) {
             now = Date.now();
             touchDiff = now - (touch.last || now);
-            touchTimeout && clearTimeout(touchTimeout);
+
+            if(touchTimeout) {
+                clearTimeout(touchTimeout);
+            }
 
             if (touchDiff > 0 && touchDiff <= 250) {
                 touch.isDoubleTap = true;
@@ -85,6 +88,6 @@ var SimpleSwipe = SimpleSwipe || {};
     ['tap', 'singleTap', 'doubleTap', 'longTap', 'swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown'].forEach(function (event) {
         $.fn[event] = function (callback) {
             return this.on(event, callback);
-        }
+        };
     });
-}(SimpleSwipe, $))
+}(SimpleSwipe, $));
