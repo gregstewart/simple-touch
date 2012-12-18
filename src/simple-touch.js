@@ -1,7 +1,8 @@
 var SimpleTouch = SimpleTouch || {};
 (function (SimpleTouch, $) {
     'use strict';
-    var touch = {}, touchTimeout, longTapDelay = 750, longTapTimeout, swipeTimeout, self = this;
+    var touch = {}, touchTimeout, longTapDelay = 750, longTapTimeout, swipeTimeout, self = this,
+        events = ['tap', 'singleTap', 'doubleTap', 'longTap', 'swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown'];
 
     function longTap() {
         longTapTimeout = null;
@@ -89,7 +90,7 @@ var SimpleTouch = SimpleTouch || {};
         $(window).bind('scroll', cancelAll);
     });
 
-    ['tap', 'singleTap', 'doubleTap', 'longTap', 'swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown'].forEach(function (event) {
+    $.each(events, function (event) {
         $.fn[event] = function (callback) {
             return this.on(event, callback);
         };
