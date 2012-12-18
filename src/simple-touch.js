@@ -29,7 +29,7 @@ var SimpleTouch = SimpleTouch || {};
     $(document).ready(function () {
         var now, touchDiff;
 
-        $(document).on('touchstart', function(e) {
+        $(document).on('touchstart.simple-touch', function(e) {
             var eventTarget = SimpleTouch.utils.getTarget(e);
             now = Date.now();
             touchDiff = now - (touch.last || now);
@@ -50,12 +50,12 @@ var SimpleTouch = SimpleTouch || {};
 
             longTapTimeout = setTimeout(longTap, longTapDelay);
 
-        }).on('touchmove', function (e) {
+        }).on('touchmove.simple-touch', function (e) {
             var eventTarget = SimpleTouch.utils.getTarget(e);
             cancelLongTap();
             touch.x2 = eventTarget.pageX;
             touch.y2 = eventTarget.pageY;
-        }).on('touchend', function (e) {
+        }).on('touchend.simple-touch', function (e) {
             cancelLongTap();
 
             if (SimpleTouch.utils.isSwipe(touch.x1, touch.x2, touch.y1, touch.y2)) {
@@ -84,7 +84,7 @@ var SimpleTouch = SimpleTouch || {};
                     }, 250);
                 }
             }
-        }).bind('touchcancel', cancelAll);
+        }).bind('touchcancel.simple-touch', cancelAll);
 
         $(window).bind('scroll', cancelAll);
     });
